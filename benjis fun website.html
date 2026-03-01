@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Benji's Mega Fun Universe 🌌</title>
+  <meta name="description" content="A fun touch-first adventure site for Benji: universe, countries, NFL, Mario, and Roblox vibes!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3" />
+  <script src="script.js?v=3" defer></script>
+</head>
+<body>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <header class="hero">
+    <canvas id="star-canvas" class="star-canvas" aria-hidden="true"></canvas>
+    <h1>🚀 Benji’s Mega Fun Universe 🎉</h1>
+    <p>Infinite imagination. Tap everywhere and make this universe party!</p>
+
+    <div class="hero-actions">
+      <button class="btn big" data-confetti="big">Launch Confetti Blast</button>
+      <button class="btn" data-scroll="#missions">Start Mission</button>
+      <button class="btn ocean-jump" data-scroll="#undersea">Undersea Laugh Zone</button>
+    </div>
+
+    <div class="new-banner" aria-live="polite">NEW: ⚡ Quick Tap Challenge removed 🌈 No-Click Fun Zone added below ⬇️</div>
+    <blockquote class="einstein-quote hero-quote" id="hero-quote"></blockquote>
+  </header>
+
+  <main>
+    <section class="panel" id="missions">
+      <h2>🌍 Mission Control</h2>
+      <p>Pick your adventure. Every tap powers up Benji’s Fun Meter!</p>
+
+      <div class="chips" role="list" aria-label="Favorite topics">
+        <button class="chip" data-theme="space">✨ Universe</button>
+        <button class="chip" data-theme="countries">🗺️ Countries</button>
+        <button class="chip" data-theme="nfl">🏈 NFL</button>
+        <button class="chip" data-theme="mario">🍄 Mario Bros</button>
+        <button class="chip" data-theme="roblox">🧱 Roblox</button>
+        <button class="chip" data-theme="minecraft">⬛ Minecraft</button>
+      </div>
+
+
+      <div class="fun-meter-wrap" aria-live="polite">
+        <div class="fun-meter-label">Fun Meter</div>
+        <div class="fun-meter-track">
+          <div id="fun-meter" class="fun-meter-fill" style="width: 0%;"></div>
+        </div>
+        <div id="fun-meter-text" class="fun-meter-text">0% charged</div>
+      </div>
+    </section>
+
+    <section class="panel timezone-panel" id="timezone">
+      <h2>🕒 Timezone Globe</h2>
+      <p>Earth time telemetry: local zone, UTC offset, precision clock, and orbital day count.</p>
+
+      <div class="tz-picker-wrap">
+        <div class="tz-picker" role="listbox" aria-label="Select a timezone">
+          <button class="tz-pick active" data-tz="-12">-12</button>
+          <button class="tz-pick" data-tz="-11">-11</button>
+          <button class="tz-pick" data-tz="-10">-10</button>
+          <button class="tz-pick" data-tz="-9">-9</button>
+          <button class="tz-pick" data-tz="-8">-8</button>
+          <button class="tz-pick" data-tz="-7">-7</button>
+          <button class="tz-pick" data-tz="-6">-6</button>
+          <button class="tz-pick" data-tz="-5">-5</button>
+          <button class="tz-pick" data-tz="-4">-4</button>
+          <button class="tz-pick" data-tz="-3">-3</button>
+          <button class="tz-pick" data-tz="-2">-2</button>
+          <button class="tz-pick" data-tz="-1">-1</button>
+          <button class="tz-pick" data-tz="0">UTC</button>
+          <button class="tz-pick" data-tz="1">+1</button>
+          <button class="tz-pick" data-tz="2">+2</button>
+          <button class="tz-pick" data-tz="3">+3</button>
+          <button class="tz-pick" data-tz="4">+4</button>
+          <button class="tz-pick" data-tz="5">+5</button>
+          <button class="tz-pick" data-tz="5.5">+5:30</button>
+          <button class="tz-pick" data-tz="6">+6</button>
+          <button class="tz-pick" data-tz="7">+7</button>
+          <button class="tz-pick" data-tz="8">+8</button>
+          <button class="tz-pick" data-tz="9">+9</button>
+          <button class="tz-pick" data-tz="9.5">+9:30</button>
+          <button class="tz-pick" data-tz="10">+10</button>
+          <button class="tz-pick" data-tz="11">+11</button>
+          <button class="tz-pick" data-tz="12">+12</button>
+          <button class="tz-pick" data-tz="13">+13</button>
+          <button class="tz-pick" data-tz="14">+14</button>
+        </div>
+        <button class="tz-local-btn" id="tz-local-btn">📍 My Time</button>
+      </div>
+
+      <div class="timezone-wrap">
+        <button id="globe-btn" class="globe" aria-label="Globe showing local timezone">
+          <span class="globe-shine" aria-hidden="true"></span>
+          <span class="globe-lat"></span>
+          <span class="globe-lat lat2"></span>
+          <span class="globe-lat lat3"></span>
+          <span class="globe-lon"></span>
+          <span class="globe-lon lon2"></span>
+          <span class="globe-lon lon3"></span>
+        </button>
+
+        <div class="timezone-info" aria-live="polite">
+          <div class="tz-label">Earth Time Telemetry</div>
+          <div id="timezone-name" class="tz-name">Loading…</div>
+          <div id="timezone-time" class="tz-time">--:--:--</div>
+          <blockquote class="einstein-quote inline-quote">“The important thing is not to stop questioning.” — Albert Einstein</blockquote>
+
+          <div class="tz-science-grid" role="list" aria-label="Timezone telemetry data">
+            <div class="metric" role="listitem">
+              <span class="metric-key">UTC Offset</span>
+              <span id="metric-offset" class="metric-value">--</span>
+            </div>
+            <div class="metric" role="listitem">
+              <span class="metric-key">ISO 8601</span>
+              <span id="metric-iso" class="metric-value">--</span>
+            </div>
+            <div class="metric" role="listitem">
+              <span class="metric-key">Unix Time</span>
+              <span id="metric-unix" class="metric-value">--</span>
+            </div>
+            <div class="metric" role="listitem">
+              <span class="metric-key">Day of Year</span>
+              <span id="metric-day" class="metric-value">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel undersea-panel" id="undersea">
+      <h2>🫧 Undersea Laugh Zone</h2>
+      <p>Inspired by silly ocean adventures with goofy friends and jellyfish chaos.</p>
+
+      <div class="undersea-wrap">
+        <div class="bubble-orb" aria-hidden="true"></div>
+        <div>
+          <div class="undersea-actions">
+            <button class="btn undersea-btn" data-undersea="adventure">Ocean Adventure</button>
+            <button class="btn undersea-btn" data-undersea="friends">Best Friend Moment</button>
+            <button class="btn undersea-btn" data-undersea="games">Mini Game Idea</button>
+          </div>
+          <p id="undersea-fact" class="fact undersea-fact">Dive in and tap a button to start your silly ocean adventure! 🐠</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="zones">
+      <article class="card space">
+        <h3>🌌 Cosmic Quest</h3>
+        <p>Find silly planets and race comets through rainbow space.</p>
+        <button class="card-btn" data-fact-group="space">Tap for Space Surprise</button>
+        <p class="fact" id="space-fact">Saturn has the most amazing rings!</p>
+      </article>
+
+      <article class="card countries">
+        <h3>🧭 Country Hopper</h3>
+        <p>Teleport to cool places and collect world flags.</p>
+        <button class="card-btn" data-fact-group="countries">Tap for Country Surprise</button>
+        <p class="fact" id="countries-fact">Brazil has the Amazon rainforest.</p>
+      </article>
+
+      <article class="card nfl">
+        <h3>🏈 NFL Blitz Zone</h3>
+        <p>Dodge defenders and score a mega touchdown dance.</p>
+        <button class="card-btn" data-fact-group="nfl">Tap for NFL Surprise</button>
+        <p class="fact" id="nfl-fact">A touchdown gives 6 points.</p>
+        <a href="https://www.nfl.com" target="_blank" rel="noopener noreferrer" class="card-btn rainbow" style="display:block;text-align:center;text-decoration:none;margin-top:0.4rem">Go to NFL.com 🏈</a>
+      </article>
+
+      <article class="card mario">
+        <h3>🍄 Mushroom Kingdom Run</h3>
+        <p>Smash blocks, jump goombas, and grab shiny stars.</p>
+        <button class="card-btn" data-fact-group="mario">Tap for Mario Surprise</button>
+        <p class="fact" id="mario-fact">Mario first appeared in Donkey Kong.</p>
+      </article>
+
+      <article class="card roblox">
+        <h3>🧱 Roblox Build Lab</h3>
+        <p>Create wild obstacle worlds and epic mini games.</p>
+        <button class="card-btn" data-fact-group="roblox">Tap for Roblox Surprise</button>
+        <p class="fact" id="roblox-fact">Roblox lets players create their own games.</p>
+        <a href="https://www.roblox.com" target="_blank" rel="noopener noreferrer" class="card-btn rainbow" style="display:block;text-align:center;text-decoration:none;margin-top:0.4rem">Go to Roblox.com 🧱</a>
+      </article>
+
+      <article class="card mix">
+        <h3>🎮 Ultimate Mix Mode</h3>
+        <p>Space + Countries + NFL + Mario + Roblox = MAX FUN!</p>
+        <button class="card-btn rainbow" data-confetti="sprinkle">Tap to Mix It Up</button>
+        <p class="fact" id="mix-fact">You unlocked the Benji Cosmic Champion combo!</p>
+      </article>
+    </section>
+
+    <section class="panel flag-panel" id="flag-quiz">
+      <h2>🏳️ Guess the Flag</h2>
+      <p>Can you match the flag to the right country?</p>
+
+      <div class="flag-quiz-wrap">
+        <div id="flag-display" class="flag-display" aria-live="polite">🇩🇪</div>
+
+        <div class="flag-options" role="group" aria-label="Flag answer options">
+          <button class="btn flag-option" data-country="Germany">Germany</button>
+          <button class="btn flag-option" data-country="USA">USA</button>
+          <button class="btn flag-option" data-country="Brazil">Brazil</button>
+          <button class="btn flag-option" data-country="Japan">Japan</button>
+          <button class="btn flag-option" data-country="Italy">Italy</button>
+        </div>
+
+        <p id="flag-feedback" class="fact flag-feedback">Pick an answer to start!</p>
+
+        <div class="flag-stats">
+          <span>✅ Score: <strong id="flag-score">0</strong></span>
+          <span>🔥 Streak: <strong id="flag-streak">0</strong></span>
+        </div>
+
+        <button id="flag-next" class="card-btn">Next Flag</button>
+      </div>
+    </section>
+
+    <section class="panel roblox-panel" id="roblox-hub">
+      <h2>🧱 Roblox Universe Hub</h2>
+      <p class="roblox-tagline">Powering Imagination — build anything, play everything, be anyone!</p>
+
+      <div class="roblox-grid">
+        <div class="roblox-tile avatar-tile">
+          <div class="roblox-tile-icon" aria-hidden="true">🤖</div>
+          <h3>Avatar Lab</h3>
+          <p>Create a random avatar combo!</p>
+          <button class="card-btn roblox-btn" id="avatar-gen">Generate Avatar</button>
+          <p class="fact roblox-result" id="avatar-result">Tap to build your look!</p>
+        </div>
+
+        <div class="roblox-tile experience-tile">
+          <div class="roblox-tile-icon" aria-hidden="true">🎮</div>
+          <h3>Experience Generator</h3>
+          <p>What should you play next?</p>
+          <button class="card-btn roblox-btn" id="exp-gen">Random Experience</button>
+          <p class="fact roblox-result" id="exp-result">Your next adventure awaits!</p>
+        </div>
+
+        <div class="roblox-tile build-tile">
+          <div class="roblox-tile-icon" aria-hidden="true">🏗️</div>
+          <h3>Build Challenge</h3>
+          <p>Get a wild building prompt!</p>
+          <button class="card-btn roblox-btn" id="build-gen">New Challenge</button>
+          <p class="fact roblox-result" id="build-result">Ready to create something epic?</p>
+        </div>
+
+        <div class="roblox-tile device-tile">
+          <div class="roblox-tile-icon" aria-hidden="true">📱</div>
+          <h3>Play Anywhere</h3>
+          <p>Roblox runs on phones, tablets, PC, Xbox, PlayStation &amp; Meta Quest!</p>
+          <button class="card-btn roblox-btn" id="device-fact">Device Fun Fact</button>
+          <p class="fact roblox-result" id="device-result">Tap for a platform surprise!</p>
+        </div>
+      </div>
+
+      <div class="roblox-power-bar">
+        <span class="roblox-power-label">🔥 Imagination Power</span>
+        <div class="roblox-power-track">
+          <div id="roblox-power" class="roblox-power-fill" style="width: 0%;"></div>
+        </div>
+        <span id="roblox-power-text" class="roblox-power-text">0%</span>
+      </div>
+    </section>
+
+    <section class="panel quote-panel" id="einstein-quotes">
+      <h2>🧠 Einstein Sparks</h2>
+      <div class="quote-grid">
+        <blockquote class="einstein-quote">“Life is like riding a bicycle. To keep your balance you must keep moving.” — Albert Einstein</blockquote>
+        <blockquote class="einstein-quote">“Creativity is intelligence having fun.” — Albert Einstein</blockquote>
+        <blockquote class="einstein-quote">“I have no special talent. I am only passionately curious.” — Albert Einstein</blockquote>
+      </div>
+    </section>
+
+    <section class="panel chill-panel" id="no-click-fun">
+      <h2>🌈 No-Click Fun Zone</h2>
+      <p>Just watch the vibes. This section runs itself.</p>
+
+      <div class="chill-stage" aria-live="polite">
+        <p id="chill-line" class="chill-line">Loading fun wave...</p>
+        <div class="chill-emoji-row" aria-hidden="true">
+          <span>🚀</span>
+          <span>🌟</span>
+          <span>🪐</span>
+          <span>🎮</span>
+          <span>🌊</span>
+          <span>🧱</span>
+          <span>🎉</span>
+          <span>😎</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Made with fun for Benji 💙</p>
+  </footer>
+
+</body>
+</html>
